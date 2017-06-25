@@ -23,12 +23,14 @@ from mitmproxy import http
 # 2. Run mitmproxy:
 #    ~$ mitmdump -s rewrite.py
 #
-# 3. Quick check setupL
+# 3. Quick check setup:
 #    http://example.com/pass should return data in test_pass.json
 #    http://example.com/fail should return data in test_fail.json
 #
 # 4. Update routeerjson, pair URL with JSON file, for e.g:
+#    ```
 #    "http://exmaple.com": "exmaple"
+#    ```
 #    The response of "http://exmaple.com" will be rewrote by the content
 #    in exmaple.json file
 #
@@ -40,7 +42,7 @@ from mitmproxy import http
 #      "content": ...
 #    }
 #    ```
-#    status:http status code, INT
+#    status:http status code, an INT number
 #    header: http response headers
 #    content: http response body
 
