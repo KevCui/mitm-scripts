@@ -1,0 +1,5 @@
+{
+    "http://example.com/": "test_pass",
+    "http://example.com/pass": "test_pass",
+    "http://example.com/fail": "test_fail"
+}
