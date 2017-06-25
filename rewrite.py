@@ -47,7 +47,7 @@ from mitmproxy import http
 #    content: http response body
 
 HOME_DIR = './'
-DATA_DIR = './data/'
+DATA_DIR = './response/'
 ROUTER_JSON = HOME_DIR + 'router.json'
 
 def readJsonFile(file):
