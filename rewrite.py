@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import yaml
 from mitmproxy import http
 
 # This script is a mitmproxy inline script.
@@ -18,7 +19,7 @@ from mitmproxy import http
 # 1. Configure global variables:
 #    - HOME_DIR: script directory
 #    - DATA_DIR: JSON files directory
-#    - ROUTER_JSON: router.json file directory
+#    - ROUTER_JSON: router.yaml file directory
 #
 # 2. Run mitmproxy:
 #    ~$ mitmdump -s rewrite.py
@@ -48,12 +49,12 @@ from mitmproxy import http
 
 HOME_DIR = './'
 DATA_DIR = './response/'
-ROUTER_JSON = HOME_DIR + 'router.json'
+ROUTER_FILE = HOME_DIR + 'router.yaml'
 
-def readJsonFile(file):
-    """Read file and return json data
+def readFile(file):
+    """Read file and return json data or dict
 
-    Read file and return all its content as json format
+    Read file and return all its content as json format or dict
 
     Arg:
         file: File name, including its path
@@ -63,27 +64,32 @@ def readJsonFile(file):
         print("File: " + file + ' not found!')
         sys.exit(1)
 
+    fname, fext = os.path.splitext(file)
+
     with open(file) as data:
-        return json.load(data)
+        if fext == ".yaml":
+            return yaml.load(data)
+        else:
+            return json.load(data)
 
 def request(flow: http.HTTPFlow) -> None:
     """Mock response
 
-    If URL corresponds to router.json, use matched json file as response
-    Link url and json file in router.json
+    If URL corresponds to router.yaml, use matched json file as response
+    Link url and json file in router.yaml
 
     Arg:
         flow: http flow, fom mitm
     """
 
-    router = readJsonFile(ROUTER_JSON)
+    router = readFile(ROUTER_FILE)
     url = flow.request.url
 
     if url in router:
         jsonfile = DATA_DIR + router[url] + '.json'
-        print(url + ' found in router. Send data from "' + jsonfile + '"')
+        print(url + ' found. Send data from "' + jsonfile + '"')
 
-        data = readJsonFile(jsonfile)
+        data = readFile(jsonfile)
 
         status = int(data['status'])
         try:
