@@ -30,10 +30,11 @@ from mitmproxy import http
 #
 # 4. Update routeerjson, pair URL with JSON file, for e.g:
 #    ```
-#    "http://exmaple.com": "exmaple"
+#    http://exmaple.com: exmaple
 #    ```
 #    The response of "http://exmaple.com" will be rewrote by the content
-#    in exmaple.json file
+#    in exmaple.json file. Using yaml file is easy for human to read and
+#    it's possible to add comment in yaml.
 #
 # 5. Add static JSON file, file example:
 #    ```
