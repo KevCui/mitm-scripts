@@ -80,9 +80,10 @@ def request(flow: http.HTTPFlow) -> None:
     url = flow.request.url
 
     if url in router:
-        print(url + ' found in router')
+        jsonfile = DATA_DIR + router[url] + '.json'
+        print(url + ' found in router. Send data from "' + jsonfile + '"')
 
-        data = readJsonFile(DATA_DIR + router[url] + '.json')
+        data = readJsonFile(jsonfile)
 
         status = int(data['status'])
         try:
