@@ -11,7 +11,9 @@ from mitmproxy import http
 # PRECONDITION:
 # 1. mitmproxy installation:
 #    http://docs.mitmproxy.org/en/stable/install.html
-#
+#   ```
+#   sudo pip3 install -r requirements.txt
+#   ```
 # 2. Client side CA setup:
 #    http://docs.mitmproxy.org/en/stable/certinstall.html
 #
