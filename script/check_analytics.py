@@ -5,8 +5,8 @@ import yaml
 import urllib.parse
 from mitmproxy import http
 
-HOME_DIR = '.'
-YAML_DIR = HOME_DIR + '/yaml/'
+HOME_DIR = './'
+YAML_DIR = HOME_DIR + 'yaml/'
 DATA_FILE = YAML_DIR + 'analytics.yaml'
 
 def readFile(file):
