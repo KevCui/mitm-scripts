@@ -6,8 +6,7 @@ from mitmproxy import http
 
 HOME_DIR = './'
 DATA_DIR = HOME_DIR + 'response/'
-YAML_DIR = HOME_DIR + 'yaml/'
-ROUTER_FILE = YAML_DIR + 'router.yaml'
+ROUTER_FILE = HOME_DIR + 'router.yaml'
 
 def readFile(file):
     """Read file and return json data or dict
