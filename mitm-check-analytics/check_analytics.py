@@ -38,7 +38,7 @@ def check_analytics(keyword, source):
 
     for s in str(source).split("&"):
         if keyword in s:
-            print('MATCH: ' + urllib.parse.unquote(str(s)))
+            print('MATCH: \033[92m' + urllib.parse.unquote(str(s)) + '\033[0m')
 
 def check_data(url, data, flow):
     """Check data in request flow
@@ -50,7 +50,7 @@ def check_data(url, data, flow):
     """
     for link in data:
         if link in url:
-            print('>> FOUND: ' + str(link))
+            print('>> FOUND: \033[1m' + str(link) + '\033[0m')
             for keyword in data[link]:
                 # Check request url
                 check_analytics(keyword, flow.request.url)
