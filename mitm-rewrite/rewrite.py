@@ -43,7 +43,7 @@ def request(flow: http.HTTPFlow) -> None:
     url = flow.request.url
 
     if url in router:
-        jsonfile = DATA_DIR + router[url] + '.json'
+        jsonfile = DATA_DIR + str(router[url]) + '.json'
         print(url + ' found. Send data from "' + jsonfile + '"')
 
         data = readFile(jsonfile)
