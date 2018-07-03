@@ -1,7 +1,4 @@
-import os
-import sys
-import json
-import yaml
+import os, sys, re, json, yaml
 from mitmproxy import http
 
 HOME_DIR = './'
@@ -39,20 +36,21 @@ def request(flow: http.HTTPFlow) -> None:
         flow: http flow, fom mitm
     """
 
-    router = readFile(ROUTER_FILE)
+    routers = readFile(ROUTER_FILE)
     url = flow.request.url
 
-    if url in router:
-        jsonfile = DATA_DIR + str(router[url]) + '.json'
-        print(url + ' found. Send data from "' + jsonfile + '"')
+    for patternURL, jsonfilename in routers.items():
+        if re.match(patternURL, url) is not None:
+            jsonfile = DATA_DIR + str(jsonfilename) + '.json'
+            print(url + ' found. Send data from "' + jsonfile + '"')
 
-        data = readFile(jsonfile)
+            data = readFile(jsonfile)
 
-        status = int(data['status'])
-        try:
-            content = json.dumps(data['content'])
-        except:
-            content = ''
-        header = data['header']
+            status = int(data['status'])
+            try:
+                content = json.dumps(data['content'])
+            except:
+                content = ''
+            header = data['header']
 
-        flow.response = http.HTTPResponse.make(status, content, header)
+            flow.response = http.HTTPResponse.make(status, content, header)
