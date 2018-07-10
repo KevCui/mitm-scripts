@@ -33,7 +33,7 @@ def request(flow: http.HTTPFlow) -> None:
     Link url and json file in router.yaml
 
     Arg:
-        flow: http flow, fom mitm
+        flow: http flow, from mitm
     """
 
     routers = readFile(ROUTER_FILE)
