@@ -1,0 +1,9 @@
+# URL:
+#   - min second
+#   - max second
+http.*logout:
+    - 8
+    - 9
+http.*login.*:
+    - 3
+    - 5
