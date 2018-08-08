@@ -26,7 +26,7 @@ def readFile(file):
         else:
             return json.load(data)
 
-def request(flow: http.HTTPFlow) -> None:
+def response(flow: http.HTTPFlow) -> None:
     """Mock response
 
     If URL corresponds to router.yaml, use matched json file as response
