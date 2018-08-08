@@ -1,1 +1,2 @@
-# .*example.com: example
+### TEST
+http://(www.|)example.com: example
