@@ -87,3 +87,16 @@ To configure URL and delay time, edit `request.yaml`
 ~$ cd mitm-delay
 ~$ mitmdump -s delay-request.py
 ```
+
+---
+
+## mitm-replace
+
+This scrip will replace the specific string to another on. Like *mitm-rewrite", a `router.json` is used to link URL and yaml file in `response` folder. In the yaml file, the old and new strings can be defined. Don't forget to uncomment URLs in `router.json` and make it work on the fly! 
+
+### HOW TO USE:
+
+```
+~$ cd mitm-replace
+~$ mitmdump -s mitm-replace.py
+```
