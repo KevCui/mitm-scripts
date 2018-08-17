@@ -1,4 +1,5 @@
-import os, yaml, re
+import os, re
+from ruamel.yaml import YAML
 from mitmproxy import http
 from time import sleep
 from random import randint
@@ -23,6 +24,7 @@ def readFile(file):
 
     with open(file) as data:
         if fext == ".yaml":
+             yaml = YAML(typ='safe')
              return yaml.load(data)
         else:
              return json.load(data)

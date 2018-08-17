@@ -1,4 +1,5 @@
-import os, sys, json, yaml, urllib.parse
+import os, sys, json, urllib.parse
+from ruamel.yaml import YAML
 from mitmproxy import http
 
 DATA_FILE = './analytics.yaml'
@@ -20,6 +21,7 @@ def readFile(file):
 
     with open(file) as data:
         if fext == ".yaml":
+            yaml = YAML(typ="safe")
             return yaml.load(data)
         else:
             return json.load(data)

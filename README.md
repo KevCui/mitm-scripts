@@ -4,10 +4,7 @@ This is a collection of some handy [mitmproxy](https://github.com/mitmproxy/mitm
 
 ## PRECONDITION:
 
-1. Requirements installation:
-```
-~$ sudo pip3 install -r requirements.txt
-```
+1. Install [mitmproxy](https://docs.mitmproxy.org/stable/overview-installation/)
 
 2. Client side CA setup: http://docs.mitmproxy.org/en/stable/certinstall.html
 

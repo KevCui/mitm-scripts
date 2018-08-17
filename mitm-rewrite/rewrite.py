@@ -1,4 +1,5 @@
-import os, sys, re, json, yaml
+import os, sys, re, json
+from ruamel.yaml import YAML
 from mitmproxy import http
 
 HOME_DIR = './'
@@ -22,6 +23,7 @@ def readFile(file):
 
     with open(file) as data:
         if fext == ".yaml":
+            yaml = YAML(typ='safe')
             return yaml.load(data)
         else:
             return json.load(data)
