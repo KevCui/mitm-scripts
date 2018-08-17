@@ -29,7 +29,7 @@ The purpose of this script is to return mock JSON response for certain target UR
 - Open http://example.com/pass should return data in test_pass.json
 - Open http://example.com/fail should return data in test_fail.json
 
-3. Update router.json, pair URL with JSON file, for e.g:
+3. Update router.yaml, pair URL with JSON file, for e.g:
 ```
 http://example.com: example
 ```
@@ -92,7 +92,7 @@ To configure URL and delay time, edit `request.yaml`
 
 ## mitm-replace
 
-This scrip will replace the specific string to another on. Like *mitm-rewrite*, a `router.json` is used to link URL and yaml file in `response` folder. In the yaml file, the old and new strings can be defined. Don't forget to uncomment URLs in `router.json` and make it work on the fly! 
+This scrip will replace the specific string to another on. Like *mitm-rewrite*, a `router.yaml` is used to link URL and yaml file in `response` folder. In the yaml file, the old and new strings can be defined. Don't forget to uncomment URLs in `router.yaml` and make it work on the fly! 
 
 ### HOW TO USE:
 
