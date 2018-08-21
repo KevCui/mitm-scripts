@@ -1,9 +1,8 @@
-import os, re
+import os, re, random
 from ruamel.yaml import YAML
 from mitmproxy import http
 from mitmproxy import ctx
 from time import sleep
-from random import randint
 
 HOME_DIR = './'
 CONFIG_FILE = HOME_DIR + 'request.yaml'
@@ -44,10 +43,10 @@ def delay(flow):
 
     if config is not None:
         for patternURL, timer in config.items():
-            delay = randint(min(timer[0], timer[1]), max(timer[0], timer[1]))
+            delay = round(random.uniform(min(timer[0], timer[1]), max(timer[0], timer[1])), 2)
             if re.match(patternURL, url) is not None:
                 ctx.log.warn(str(delay) + 's delay: ' + url)
-                sleep(int(delay))
+                sleep(delay)
 
 def request(flow: http.HTTPFlow) -> None:
     delay(flow)
