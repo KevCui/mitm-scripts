@@ -1,6 +1,7 @@
 import os, re
 from ruamel.yaml import YAML
 from mitmproxy import http
+from mitmproxy import ctx
 from time import sleep
 from random import randint
 
@@ -17,8 +18,8 @@ def readFile(file):
     """
 
     if not os.path.isfile(file):
-        print("File: " + file + ' not found!')
-        sys.exit(1)
+        ctx.log.error("File: " + file + ' not found!')
+        return None
 
     fname, fext = os.path.splitext(file)
 
@@ -41,12 +42,12 @@ def delay(flow):
     config = readFile(CONFIG_FILE)
     url = flow.request.url
 
-    for patternURL, timer in config.items():
-        delay = randint(min(timer[0], timer[1]), max(timer[0], timer[1]))
-        if re.match(patternURL, url) is not None:
-            print('--------------------')
-            print(str(delay) + 's delay: ' + url)
-            sleep(int(delay))
+    if config is not None:
+        for patternURL, timer in config.items():
+            delay = randint(min(timer[0], timer[1]), max(timer[0], timer[1]))
+            if re.match(patternURL, url) is not None:
+                ctx.log.warn(str(delay) + 's delay: ' + url)
+                sleep(int(delay))
 
 def request(flow: http.HTTPFlow) -> None:
     delay(flow)

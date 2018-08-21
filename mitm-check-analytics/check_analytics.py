@@ -1,6 +1,7 @@
 import os, sys, json, urllib.parse
 from ruamel.yaml import YAML
 from mitmproxy import http
+from mitmproxy import ctx
 
 DATA_FILE = './analytics.yaml'
 
@@ -14,8 +15,8 @@ def readFile(file):
     """
 
     if not os.path.isfile(file):
-        print("File: " + file + ' not found!')
-        sys.exit(1)
+        ctx.log.error("File: " + file + ' not found!')
+        return None
 
     fname, fext = os.path.splitext(file)
 
@@ -38,12 +39,12 @@ def check_analytics(keyword, source, format):
     if format is 'form':
         for s in str(source).split("&"):
             if keyword in s:
-                print('MATCH: \033[92m' + urllib.parse.unquote(str(s)) + '\033[0m')
+                ctx.log.warn('MATCH: ' + urllib.parse.unquote(str(s)))
 
     if format is 'json':
         txt = json.loads(source)
         try:
-            print('MATCH: \033[92m' + keyword + '=' + txt[keyword] + '\033[0m')
+            ctx.log.warn('MATCH: ' + keyword + '=' + txt[keyword])
         except:
             pass
 
@@ -56,21 +57,22 @@ def check_data(url, data, flow):
         flow: http flow, from mitm
     """
 
-    for link in data:
-        if link in url:
-            print('>> FOUND: \033[1m' + str(url) + '\033[0m')
-            for keyword in data[link]:
-                # Check request url
-                check_analytics(keyword, flow.request.url, 'form')
+    if data is not None:
+        for link in data:
+            if link in url:
+                ctx.log.warn('>> FOUND: ' + str(url))
+                for keyword in data[link]:
+                    # Check request url
+                    check_analytics(keyword, flow.request.url, 'form')
 
-                for header,value in flow.request.headers.items():
-                    if 'Content-Type' in str(header):
-                        # Check request body, form format
-                        if 'form' in str(value):
-                            check_analytics(keyword, flow.request.text, 'form')
-                        # Check request body, json format
-                        if 'json' in str(value):
-                            check_analytics(keyword, flow.request.text, 'json')
+                    for header,value in flow.request.headers.items():
+                        if 'Content-Type' in str(header):
+                            # Check request body, form format
+                            if 'form' in str(value):
+                                check_analytics(keyword, flow.request.text, 'form')
+                            # Check request body, json format
+                            if 'json' in str(value):
+                                check_analytics(keyword, flow.request.text, 'json')
 
 def request(flow: http.HTTPFlow) -> None:
     """Show matched analytics keyword and value

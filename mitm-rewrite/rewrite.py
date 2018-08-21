@@ -1,6 +1,7 @@
 import os, sys, re, json
 from ruamel.yaml import YAML
 from mitmproxy import http
+from mitmproxy import ctx
 
 HOME_DIR = './'
 DATA_DIR = HOME_DIR + 'response/'
@@ -16,8 +17,8 @@ def readFile(file):
     """
 
     if not os.path.isfile(file):
-        print("File: " + file + ' not found!')
-        sys.exit(1)
+        ctx.log.error("File: " + file + ' not found!')
+        return None
 
     fname, fext = os.path.splitext(file)
 
@@ -41,18 +42,20 @@ def response(flow: http.HTTPFlow) -> None:
     routers = readFile(ROUTER_FILE)
     url = flow.request.url
 
-    for patternURL, jsonfilename in routers.items():
-        if re.match(patternURL, url) is not None:
-            jsonfile = DATA_DIR + str(jsonfilename) + '.json'
-            print(url + ' found. Send data from "' + jsonfile + '"')
+    if routers is not None:
+        for patternURL, jsonfilename in routers.items():
+            if re.match(patternURL, url) is not None:
+                jsonfile = DATA_DIR + str(jsonfilename) + '.json'
+                ctx.log.info(url + ' found. Send data from "' + jsonfile + '"')
 
-            data = readFile(jsonfile)
+                data = readFile(jsonfile)
 
-            status = int(data['status'])
-            try:
-                content = json.dumps(data['content'])
-            except:
-                content = ''
-            header = data['header']
+                if data is not None:
+                    status = int(data['status'])
+                    try:
+                        content = json.dumps(data['content'])
+                    except:
+                        content = ''
+                    header = data['header']
 
-            flow.response = http.HTTPResponse.make(status, content, header)
+                    flow.response = http.HTTPResponse.make(status, content, header)

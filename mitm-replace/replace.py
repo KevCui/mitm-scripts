@@ -1,6 +1,7 @@
 import os, sys, re, json
 from ruamel.yaml import YAML
 from mitmproxy import http
+from mitmproxy import ctx
 
 HOME_DIR = './'
 DATA_DIR = HOME_DIR + 'response/'
@@ -16,8 +17,8 @@ def readFile(file):
     """
 
     if not os.path.isfile(file):
-        print("File: " + file + ' not found!')
-        sys.exit(1)
+        ctx.log.error("File: " + file + ' not found!')
+        return None
 
     fname, fext = os.path.splitext(file)
 
@@ -41,12 +42,14 @@ def response(flow: http.HTTPFlow) -> None:
     routers = readFile(ROUTER_FILE)
     url = flow.request.url
 
-    for patternURL, yamlfilename in routers.items():
-        if re.match(patternURL, url) is not None:
-            yamlfile = DATA_DIR + str(yamlfilename) + '.yaml'
-            print(url + ' found. Replace strings from "' + yamlfile + '"')
+    if routers is not None:
+        for patternURL, yamlfilename in routers.items():
+            if re.match(patternURL, url) is not None:
+                yamlfile = DATA_DIR + str(yamlfilename) + '.yaml'
+                ctx.log.info(url + ' found. Replace strings from "' + yamlfile + '"')
 
-            data = readFile(yamlfile)
+                data = readFile(yamlfile)
 
-            for old, new in data.items():
-                flow.response.content = flow.response.content.replace(bytes(old.encode('utf8')), bytes(new.encode('utf8')))
+                if data is not None:
+                    for old, new in data.items():
+                        flow.response.content = flow.response.content.replace(bytes(old.encode('utf8')), bytes(new.encode('utf8')))
