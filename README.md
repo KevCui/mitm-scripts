@@ -97,3 +97,16 @@ This scrip will replace the specific string to another on. Like *mitm-rewrite*, 
 ~$ cd mitm-replace
 ~$ mitmdump -s mitm-replace.py
 ```
+
+---
+
+## mitm-random-outage
+
+This script will simulate sever outage and return 503 code. It will pick randomly the requests to  make it 503. The percentage of outage can be changed as the variable percentage in the script.
+
+### HOW TO USE:
+
+```
+~$ cd mitm-outage
+~$ mitmproxy -s outage.py
+```
