@@ -18,15 +18,14 @@ The purpose of this script is to return mock JSON response for certain target UR
 
 1. Run mitmdump:
 ```
-~$ cd mitm-rewrite
-~$ mitmdump -s rewrite.py
+~$ mitmdump -s mitm-rewrite.py
 ```
 
 2. Quick check setup on client side:
 - Open http://example.com/pass should return data in test_pass.json
 - Open http://example.com/fail should return data in test_fail.json
 
-3. Update router.yaml, pair URL with JSON file, for e.g:
+3. Update `rewrite-router.yaml`, pair URL with JSON file, for e.g:
 ```
 http://example.com: example
 ```
@@ -64,8 +63,7 @@ It's possible to configure the url and
 
 1. Run mitmdump:
 ```
-~$ cd mitm-check-analytics
-~$ mitmdump -s check_analytics.py
+~$ mitmdump -s mitm-check_analytics.py
 ```
 
 2. Visit target web page in clients: browsers or apps. The matched analytics keyword and value will show up in terminal.
@@ -81,20 +79,18 @@ To configure URL and delay time, edit `request.yaml`
 ### HOW TO USE:
 
 ```
-~$ cd mitm-delay
-~$ mitmdump -s delay-request.py
+~$ mitmdump -s mitm-delay-request.py
 ```
 
 ---
 
 ## mitm-replace
 
-This scrip will replace the specific string to another on. Like *mitm-rewrite*, a `router.yaml` is used to link URL and yaml file in `response` folder. In the yaml file, the old and new strings can be defined. Don't forget to uncomment URLs in `router.yaml` and make it work on the fly! 
+This scrip will replace the specific string to another on. Like *mitm-rewrite*, a `replace-router.yaml` is used to link URL and yaml file in `response` folder. In the yaml file, the old and new strings can be defined. Don't forget to uncomment URLs in `replace-router.yaml` and make it work on the fly!
 
 ### HOW TO USE:
 
 ```
-~$ cd mitm-replace
 ~$ mitmdump -s mitm-replace.py
 ```
 
@@ -107,6 +103,5 @@ This script will simulate sever outage and return 503 code. It will pick randoml
 ### HOW TO USE:
 
 ```
-~$ cd mitm-outage
-~$ mitmproxy -s outage.py
+~$ mitmproxy -s mitm-random-outage.py
 ```
