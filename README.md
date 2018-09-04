@@ -56,7 +56,7 @@ The changes in yaml files will be applied **on the fly**, no need to restart pro
 
 The usage of this script is to display real-time analytics key and value, in order to help checking analytics efficiently.
 
-To configure URL and keywords, edit `analytics.yaml`
+To configure URL and keywords, edit `check-analytics.yaml`
 It's possible to configure the url and
 
 ### HOW TO USE:
@@ -74,7 +74,7 @@ It's possible to configure the url and
 
 This script will randomly delay HTTP/HTTPS request time and response time, in order to simulate the slow network.
 
-To configure URL and delay time, edit `request.yaml`
+To configure URL and delay time, edit `delay-request.yaml`
 
 ### HOW TO USE:
 
