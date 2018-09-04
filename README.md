@@ -105,3 +105,14 @@ This script will simulate sever outage and return 503 code. It will pick randoml
 ```
 ~$ mitmproxy -s mitm-random-outage.py
 ```
+
+---
+
+## mitm-redirect-host
+
+This script will redirect the request host of URL request to another host. The matching URL and redirect host can be defined in `redirect-router.yaml`. Attention: only the host part of request URL will be replaced.
+### HOW TO USE:
+
+```
+~$ mitmproxy -s mitm-redirect-host.py
+```
