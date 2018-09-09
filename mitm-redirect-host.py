@@ -1,32 +1,9 @@
-import os, sys, re, json
-from ruamel.yaml import YAML
 from mitmproxy import http
 from mitmproxy import ctx
+from mitmutils import utils
+import re
 
-HOME_DIR = './'
-ROUTER_FILE = HOME_DIR + 'redirect-router.yaml'
-
-def readFile(file):
-    """Read file and return json data or dict
-
-    Read file and return all its content as json format or dict
-
-    Arg:
-        file: File name, including its path
-    """
-
-    if not os.path.isfile(file):
-        ctx.log.error("File: " + file + ' not found!')
-        return None
-
-    fname, fext = os.path.splitext(file)
-
-    with open(file) as data:
-        if fext == ".yaml":
-            yaml = YAML(typ='safe')
-            return yaml.load(data)
-        else:
-            return json.load(data)
+ROUTER_FILE = './redirect-router.yaml'
 
 def request(flow: http.HTTPFlow) -> None:
     """Mock request
@@ -37,7 +14,7 @@ def request(flow: http.HTTPFlow) -> None:
         flow: http flow, from mitm
     """
 
-    routers = readFile(ROUTER_FILE)
+    routers = utils.readFile(ROUTER_FILE)
     url = flow.request.url
 
     if routers is not None:

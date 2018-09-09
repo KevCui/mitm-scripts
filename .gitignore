@@ -2,4 +2,4 @@
 *.swp
 .*
 mitm-rewrite/response/*.json
-*/__pycache__/
+*__pycache__*

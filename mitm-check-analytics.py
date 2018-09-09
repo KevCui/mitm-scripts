@@ -1,31 +1,9 @@
-import os, sys, json, urllib.parse
-from ruamel.yaml import YAML
+import json, urllib.parse
 from mitmproxy import http
 from mitmproxy import ctx
+from mitmutils import utils
 
-DATA_FILE = './analytics.yaml'
-
-def readFile(file):
-    """Read file and return json data or dict
-
-    Read file and return all its content as json format or dict
-
-    Arg:
-        file: File name, including its path
-    """
-
-    if not os.path.isfile(file):
-        ctx.log.error("File: " + file + ' not found!')
-        return None
-
-    fname, fext = os.path.splitext(file)
-
-    with open(file) as data:
-        if fext == ".yaml":
-            yaml = YAML(typ="safe")
-            return yaml.load(data)
-        else:
-            return json.load(data)
+DATA_FILE = './check-analytics.yaml'
 
 def check_analytics(keyword, source, format):
     """Check and display matched keyword in source
@@ -81,4 +59,4 @@ def request(flow: http.HTTPFlow) -> None:
         flow: http flow, from mitm
     """
 
-    check_data(flow.request.url, readFile(DATA_FILE), flow)
+    check_data(flow.request.url, utils.readFile(DATA_FILE), flow)
