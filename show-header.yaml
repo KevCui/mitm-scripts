@@ -1,0 +1,4 @@
+# .*www.google*:
+    # - user-agent
+    # - Cookie
+    # - x-xss-protection
