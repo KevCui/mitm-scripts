@@ -86,7 +86,7 @@ To configure URL and delay time, edit `delay-request.yaml`
 
 ## mitm-replace
 
-This scrip will replace the specific string to another on. Like *mitm-rewrite*, a `replace-router.yaml` is used to link URL and yaml file in `response` folder. In the yaml file, the old and new strings can be defined. Don't forget to uncomment URLs in `replace-router.yaml` and make it work on the fly!
+This scrip will replace the specific string to another one. Like *mitm-rewrite*, a `replace-router.yaml` is used to link URL and yaml file in `response` folder. In the yaml file, the old and new strings can be defined. Don't forget to uncomment URLs in `replace-router.yaml` and make it work on the fly!
 
 ### HOW TO USE:
 
