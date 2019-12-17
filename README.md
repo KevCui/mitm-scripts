@@ -86,7 +86,7 @@ To configure URL and delay time, edit `delay-request.yaml`
 
 ## mitm-replace
 
-This scrip will replace the specific string to another one. Like *mitm-rewrite*, a `replace-router.yaml` is used to link URL and yaml file in `response` folder. In the yaml file, the old and new strings can be defined. Don't forget to uncomment URLs in `replace-router.yaml` and make it work on the fly!
+This script will replace the specific string to another one. Like *mitm-rewrite*, a `replace-router.yaml` is used to link URL and yaml file in `response` folder. In the yaml file, the old and new strings can be defined. Don't forget to uncomment URLs in `replace-router.yaml` and make it work on the fly!
 
 ### HOW TO USE:
 
@@ -126,10 +126,22 @@ This script will simulate sever outage and return 503 code. It will pick randoml
 
 ## mitm-show-header
 
-This scrip will print out matched request header and response header, with its value. The matching URL and header can be defined in `show-header.yaml`.
+This script will print out matched request header and response header, with its value. The matching URL and header can be defined in `show-header.yaml`.
 
 ### HOW TO USE:
 
 ```
 ~$ mitmdump -s mitm-show-header.py | grep '>>\|->'
+```
+
+---
+
+## mitm-dump-curl
+
+This script will find matching request URL and dump the request to a file in as cURL format. The matching URL and dump folder can be defined in `dump-curl.yaml`.
+
+### HOW TO USE:
+
+```
+~$ mitmdump -s mitm-dump-curl.py
 ```
