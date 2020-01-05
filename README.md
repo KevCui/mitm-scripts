@@ -145,3 +145,15 @@ This script will find matching request URL and dump the request to a file in as 
 ```
 ~$ mitmdump -s mitm-dump-curl.py
 ```
+
+---
+
+## mitm-record
+
+This script will save matching request details (request headers, request body, response headers and response body) to a specific file. The matching URl and dump folder can be defined in `record-request.yaml`.
+
+### HOW TO USE:
+
+```
+~$ mitmdump -s mitm-record.py
+```
