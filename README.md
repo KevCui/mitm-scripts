@@ -2,7 +2,7 @@
 
 This is a collection of some handy [mitmproxy](https://github.com/mitmproxy/mitmproxy) inline scripts.
 
-## PRECONDITION:
+## PRECONDITION
 
 1. Install [mitmproxy](https://docs.mitmproxy.org/stable/overview-installation/)
 
@@ -10,12 +10,12 @@ This is a collection of some handy [mitmproxy](https://github.com/mitmproxy/mitm
 
 ---
 
-## LIST OF SCRIPTS:
+## LIST OF SCRIPTS
 
 - [mitm-rewrite](#mitm-rewrite): ./mitm-rewrite.py, ./rewrite-router.yaml
 - [mitm-replace](#mitm-replace): ./mitm-replace.py, ./replace-router.yaml
-- [mitm-redirect-host](#mitm-redirect-host): ./mitm-redirect-host.py, ./redirect-router.yaml
-- [mitm-redirect-url](#mitm-redirect-url): ./mitm-redirect-url.py, ./redirect-router.yaml
+- [mitm-redirect-host](#mitm-redirect-host): ./mitm-redirect-host.py, ./redirect-request.yaml
+- [mitm-redirect-url](#mitm-redirect-url): ./mitm-redirect-url.py, ./redirect-request.yaml
 - [mitm-delay-request](#mitm-delay-request): ./mitm-delay-request.py, ./delay-request.yaml
 - [mitm-kill-request](#mitm-kill-request): ./mitm-kill-request.py, ./kill-request.yaml
 - [mitm-show-header](#mitm-show-header): ./mitm-show-header.py, ./show-header.yaml
@@ -46,21 +46,16 @@ OR
 ~$ mitmdump -s mitm-rewrite.py
 ```
 
-2. Quick check setup on client side:
-- Open http://example.com/pass should return data in test_pass.json
-- Open http://example.com/fail should return data in test_fail.json
+2. Check `rewrite-router.yaml`, to link response JSON file, for e.g:
 
-3. Update `rewrite-router.yaml`, pair URL with JSON file, for e.g:
-
-```
-http://example.com: example
+```yaml
+http://example.com/pass: test_pass
+http://example.com/fail: test_fail
 ```
 
-The response of "http://exmaple.com" will be rewrote by the content
-in example.json file. Using yaml file is easy for human to read and
-it's possible to add comment in yaml.
+It means that the response of "http://exmaple.com/pass" will be overwritten by the content in `./response/test_pass.json` file and the response of "http://exmaple.com/fail" will be overwritten by the content in `./response/test_fail.json` file.
 
-4. Add static JSON file, file example:
+3. Edit response JSON file to put mock data you want:
 
 ```json
 {
@@ -74,47 +69,47 @@ it's possible to add comment in yaml.
 - header: http response headers
 - content: response body
 
-The changes in yaml files will be applied **on the fly**, no need to restart proxy. Here is an example how it looks like:
+The changes in router yaml file and json response files will be applied **on the fly**, no need to restart proxy. Here is an example how it looks like:
 
 ![mitm-rewrite-example](screenshot/mitm-rewrite-example.jpg)
 
-**[`^        back to top        ^`](#)**
+**[`^        back to top        ^`](#mitm-script)**
 
 ---
 
 ### mitm-replace
 
-`./mitm-replace.py` can replace the specific string to another one. `replace-router.yaml` is used to link URL and yaml file in `response` folder. In the yaml file, the matching string and result strings can be defined as a pair. Don't forget to uncomment URLs in `replace-router.yaml` and make it work on the fly!
+`./mitm-replace.py` can replace the specific string to another one. `replace-router.yaml` is used to link URL and yaml file in `response` folder. In the response yaml file, the matching string and result strings can be defined as a pair. Don't forget to uncomment URLs in `replace-router.yaml` and make it work on the fly!
 
 ```
 ~$ mitmdump -s mitm-replace.py
 ```
 
-**[`^        back to top        ^`](#)**
+**[`^        back to top        ^`](#mitm-script)**
 
 ---
 
 ### mitm-redirect-host
 
-`./mitm-redirect-host.py` can redirect the request **host** of URL request to another host. The matching URL and redirect host can be defined in `redirect-router.yaml`. Attention: only the host part of request URL will be replaced.
+`./mitm-redirect-host.py` can redirect the request **host** of URL request to another host. The matching URL and redirect host can be defined in `redirect-requenst.yaml`. Attention: only the host part of request URL will be replaced.
 
 ```bash
 ~$ mitmdump -s mitm-redirect-host.py
 ```
 
-**[`^        back to top        ^`](#)**
+**[`^        back to top        ^`](#mitm-script)**
 
 ---
 
 ### mitm-redirect-url
 
-`./mitm-redirect-url.py` can redirect the whole request to another URL. The matching URL and redirect URL can be defined in `redirect-router.yaml`.
+`./mitm-redirect-url.py` can redirect the whole request to another URL. The matching URL and redirect URL can be defined in `redirect-request.yaml`.
 
 ```bash
 ~$ mitmdump -s mitm-redirect-url.py
 ```
 
-**[`^        back to top        ^`](#)**
+**[`^        back to top        ^`](#mitm-script)**
 
 ---
 
@@ -126,7 +121,7 @@ The changes in yaml files will be applied **on the fly**, no need to restart pro
 ~$ mitmdump -s mitm-delay-request.py
 ```
 
-**[`^        back to top        ^`](#)**
+**[`^        back to top        ^`](#mitm-script)**
 
 ---
 
@@ -138,7 +133,7 @@ The changes in yaml files will be applied **on the fly**, no need to restart pro
 ~$ mitmdump -s mitm-kill-request.py
 ```
 
-**[`^        back to top        ^`](#)**
+**[`^        back to top        ^`](#mitm-script)**
 
 ---
 
@@ -150,7 +145,7 @@ The changes in yaml files will be applied **on the fly**, no need to restart pro
 ~$ mitmdump -s mitm-show-header.py | grep '>>\|->'
 ```
 
-**[`^        back to top        ^`](#)**
+**[`^        back to top        ^`](#mitm-script)**
 
 ---
 
@@ -166,7 +161,7 @@ The changes in yaml files will be applied **on the fly**, no need to restart pro
 
 2. Visit target web page in clients: browsers or apps. The matched analytics keyword and value will show up in terminal.
 
-**[`^        back to top        ^`](#)**
+**[`^        back to top        ^`](#mitm-script)**
 
 ---
 
@@ -178,7 +173,7 @@ The changes in yaml files will be applied **on the fly**, no need to restart pro
 ~$ mitmdump -s mitm-dump-curl.py
 ```
 
-**[`^        back to top        ^`](#)**
+**[`^        back to top        ^`](#mitm-script)**
 
 ---
 
@@ -190,7 +185,7 @@ The changes in yaml files will be applied **on the fly**, no need to restart pro
 ~$ mitmdump -s mitm-record.py
 ```
 
-**[`^        back to top        ^`](#)**
+**[`^        back to top        ^`](#mitm-script)**
 
 ---
 
@@ -202,4 +197,4 @@ The changes in yaml files will be applied **on the fly**, no need to restart pro
 ~$ mitmdump -s mitm-random-outage.py
 ```
 
-**[`^        back to top        ^`](#)**
+**[`^        back to top        ^`](#mitm-script)**

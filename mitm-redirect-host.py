@@ -3,7 +3,7 @@ from mitmproxy import ctx
 from mitmutils import utils
 import re
 
-ROUTER_FILE = './redirect-router.yaml'
+ROUTER_FILE = './redirect-request.yaml'
 
 
 def request(flow: http.HTTPFlow) -> None:
