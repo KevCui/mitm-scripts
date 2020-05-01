@@ -157,3 +157,15 @@ This script will save matching request details (request headers, request body, r
 ```
 ~$ mitmdump -s mitm-record.py
 ```
+
+---
+
+## mitm-kill-request
+
+This script will kill all matching requests. The matching request methods and URls can be defined in `kill-request.yaml`.
+
+### HOW TO USE:
+
+```
+~$ mitmdump -s mitm-kill-request.py
+```
