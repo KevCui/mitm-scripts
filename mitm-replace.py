@@ -7,16 +7,8 @@ HOME_DIR = './'
 DATA_DIR = HOME_DIR + 'response/'
 ROUTER_FILE = HOME_DIR + 'replace-router.yaml'
 
+
 def response(flow: http.HTTPFlow) -> None:
-    """Mock response
-
-    If URL corresponds to router.yaml, use matched yaml file with replacement strings
-    Link url and yaml file in router.yaml
-
-    Arg:
-        flow: http flow, from mitm
-    """
-
     routers = utils.readFile(ROUTER_FILE)
     url = flow.request.url
 
@@ -24,7 +16,7 @@ def response(flow: http.HTTPFlow) -> None:
         for patternURL, yamlfilename in routers.items():
             if re.match(patternURL, url) is not None:
                 yamlfile = DATA_DIR + str(yamlfilename) + '.yaml'
-                ctx.log.info(url + ' found. Replace strings from "' + yamlfile + '"')
+                ctx.log.info('>>> FOUND "' + url + '" to replace strings from "' + yamlfile + '"')
 
                 data = utils.readFile(yamlfile)
                 ctx.log.info(data)

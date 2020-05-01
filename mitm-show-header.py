@@ -3,7 +3,6 @@ from mitmproxy import ctx
 from mitmutils import utils
 import re
 
-
 CONFIG_FILE = './show-header.yaml'
 
 

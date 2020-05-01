@@ -19,5 +19,5 @@ def request(flow: http.HTTPFlow) -> None:
 
             if re.match(patternURL, url) is not None:
                 dumpFile = dumpFolder + '/' + str(int(round(time.time() * 1000)))
-                ctx.log.info('Dump ' + url + ' to ' + dumpFile)
+                ctx.log.info('>>> Dump ' + url + ' to ' + dumpFile)
                 ctx.master.commands.call("export.file", 'curl', flow, dumpFile)

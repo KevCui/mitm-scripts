@@ -1,11 +1,11 @@
 import os
-import sys
 import re
 import json
 import random
 from ruamel.yaml import YAML
 from mitmproxy import ctx
 from time import sleep
+
 
 def readFile(file):
     """Read file and return json data or dict
@@ -28,6 +28,7 @@ def readFile(file):
             return yaml.load(data)
         else:
             return json.load(data)
+
 
 def delay(flow, conf):
     """Delay http flow
