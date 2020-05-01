@@ -1,4 +1,4 @@
-# mitm-script
+# mitm-scripts
 
 This is a collection of some handy [mitmproxy](https://github.com/mitmproxy/mitmproxy) inline scripts.
 
