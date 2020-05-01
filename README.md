@@ -6,9 +6,7 @@ This is a collection of some handy [mitmproxy](https://github.com/mitmproxy/mitm
 
 1. Install [mitmproxy](https://docs.mitmproxy.org/stable/overview-installation/)
 
-2. Client side CA setup: http://docs.mitmproxy.org/en/stable/certinstall.html
-
----
+2. [Configure client browser or device](https://docs.mitmproxy.org/stable/overview-getting-started/#configure-your-browser-or-device): configure proxy settings and install CA on client.
 
 ## LIST OF SCRIPTS
 
