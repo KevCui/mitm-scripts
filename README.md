@@ -1,14 +1,30 @@
 # mitm-scripts
 
-This is a collection of some handy [mitmproxy](https://github.com/mitmproxy/mitmproxy) inline scripts.
+> A collection of some handy [mitmproxy](https://github.com/mitmproxy/mitmproxy) inline scripts.
 
-## PRECONDITION
+## Table of Contents
+
+- [Precondition](#precondition)
+- [List of Scripts](#list-of-scripts)
+  - [mitm-rewrite](#mitm-rewrite)
+  - [mitm-replace](#mitm-replace)
+  - [mitm-redirect-host](#mitm-redirect-host)
+  - [mitm-redirect-url](#mitm-redirect-url)
+  - [mitm-delay-request](#mitm-delay-request)
+  - [mitm-kill-request](#mitm-kill-request)
+  - [mitm-show-header](#mitm-show-header)
+  - [mitm-check-analytics](#mitm-check-analytics)
+  - [mitm-dump-curl](#mitm-dump-curl)
+  - [mitm-record](#mitm-record)
+  - [mitm-random-outage](#mitm-random-outage)
+
+## Precondition
 
 1. Install [mitmproxy](https://docs.mitmproxy.org/stable/overview-installation/)
 
 2. [Configure client browser or device](https://docs.mitmproxy.org/stable/overview-getting-started/#configure-your-browser-or-device): configure proxy settings and install CA on client.
 
-## LIST OF SCRIPTS
+## List of Scripts
 
 - [mitm-rewrite](#mitm-rewrite): ./mitm-rewrite.py, ./rewrite-router.yaml
 - [mitm-replace](#mitm-replace): ./mitm-replace.py, ./replace-router.yaml
@@ -71,7 +87,7 @@ The changes in router yaml file and json response files will be applied **on the
 
 ![mitm-rewrite-example](screenshot/mitm-rewrite-example.jpg)
 
-**[`^        back to top        ^`](#mitm-scripts)**
+**[`^ back to top ^`](#mitm-scripts)**
 
 ---
 
@@ -83,7 +99,7 @@ The changes in router yaml file and json response files will be applied **on the
 ~$ mitmdump -s mitm-replace.py
 ```
 
-**[`^        back to top        ^`](#mitm-scripts)**
+**[`^ back to top ^`](#mitm-scripts)**
 
 ---
 
@@ -95,7 +111,7 @@ The changes in router yaml file and json response files will be applied **on the
 ~$ mitmdump -s mitm-redirect-host.py
 ```
 
-**[`^        back to top        ^`](#mitm-scripts)**
+**[`^ back to top ^`](#mitm-scripts)**
 
 ---
 
@@ -107,7 +123,7 @@ The changes in router yaml file and json response files will be applied **on the
 ~$ mitmdump -s mitm-redirect-url.py
 ```
 
-**[`^        back to top        ^`](#mitm-scripts)**
+**[`^ back to top ^`](#mitm-scripts)**
 
 ---
 
@@ -119,7 +135,7 @@ The changes in router yaml file and json response files will be applied **on the
 ~$ mitmdump -s mitm-delay-request.py
 ```
 
-**[`^        back to top        ^`](#mitm-scripts)**
+**[`^ back to top ^`](#mitm-scripts)**
 
 ---
 
@@ -131,7 +147,7 @@ The changes in router yaml file and json response files will be applied **on the
 ~$ mitmdump -s mitm-kill-request.py
 ```
 
-**[`^        back to top        ^`](#mitm-scripts)**
+**[`^ back to top ^`](#mitm-scripts)**
 
 ---
 
@@ -143,7 +159,7 @@ The changes in router yaml file and json response files will be applied **on the
 ~$ mitmdump -s mitm-show-header.py | grep '>>\|->'
 ```
 
-**[`^        back to top        ^`](#mitm-scripts)**
+**[`^ back to top ^`](#mitm-scripts)**
 
 ---
 
@@ -159,7 +175,7 @@ The changes in router yaml file and json response files will be applied **on the
 
 2. Visit target web page in clients: browsers or apps. The matched analytics keyword and value will show up in terminal.
 
-**[`^        back to top        ^`](#mitm-scripts)**
+**[`^ back to top ^`](#mitm-scripts)**
 
 ---
 
@@ -171,7 +187,7 @@ The changes in router yaml file and json response files will be applied **on the
 ~$ mitmdump -s mitm-dump-curl.py
 ```
 
-**[`^        back to top        ^`](#mitm-scripts)**
+**[`^ back to top ^`](#mitm-scripts)**
 
 ---
 
@@ -183,7 +199,7 @@ The changes in router yaml file and json response files will be applied **on the
 ~$ mitmdump -s mitm-record.py
 ```
 
-**[`^        back to top        ^`](#mitm-scripts)**
+**[`^ back to top ^`](#mitm-scripts)**
 
 ---
 
@@ -195,4 +211,4 @@ The changes in router yaml file and json response files will be applied **on the
 ~$ mitmdump -s mitm-random-outage.py
 ```
 
-**[`^        back to top        ^`](#mitm-scripts)**
+**[`^ back to top ^`](#mitm-scripts)**
