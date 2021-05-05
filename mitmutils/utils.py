@@ -5,7 +5,6 @@ import random
 from ruamel.yaml import YAML
 from mitmproxy import ctx
 from time import sleep
-from mitmproxy.script import concurrent
 
 
 def readFile(file):
