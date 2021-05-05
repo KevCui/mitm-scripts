@@ -5,6 +5,7 @@ import random
 from ruamel.yaml import YAML
 from mitmproxy import ctx
 from time import sleep
+from mitmproxy.script import concurrent
 
 
 def readFile(file):
@@ -46,5 +47,4 @@ def delay(flow, conf):
         for patternURL, timer in config.items():
             delay = round(random.uniform(min(timer[0], timer[1]), max(timer[0], timer[1])), 2)
             if re.match(patternURL, url) is not None:
-                ctx.log.warn(str(delay) + 's delay: ' + url)
                 sleep(delay)
