@@ -29,4 +29,4 @@ def response(flow: http.HTTPFlow) -> None:
                         content = ''
                     header = data['header']
 
-                    flow.response = http.HTTPResponse.make(status, content, header)
+                    flow.response = http.Response.make(status, content, header)
