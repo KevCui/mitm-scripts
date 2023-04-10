@@ -1,7 +1,7 @@
 from mitmproxy import http
-from mitmproxy import ctx
 from mitmutils import utils
 import re
+import logging
 
 CONFIG_FILE = './show-header.yaml'
 
@@ -19,10 +19,10 @@ def searchHeaders(flow, config, state):
                 else:
                     items = flow.response.headers.items()
 
-                ctx.log.warn('>> FOUND ' + state + ' header in: ' + url)
+                logging.warn('>> FOUND ' + state + ' header in: ' + url)
                 for k, v in items:
                     if k.lower() in [x.lower() for x in headers]:
-                        ctx.log.warn('-> ' + str(k) + ': ' + str(v))
+                        logging.warn('-> ' + str(k) + ': ' + str(v))
 
 
 def request(flow: http.HTTPFlow) -> None:

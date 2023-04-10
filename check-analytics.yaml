@@ -1,6 +1,6 @@
-# Google analytics, e.g: Stack Overflow
+# Google analytics
 https://www.google-analytics.com/r/collect:
-    - dl # url
-    - dt # page name
+  - dl # url
+  - dt # page name
 https://www.google-analytics.com/r/:
-    - sr # screen size
+  - sr # screen size

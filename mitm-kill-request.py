@@ -1,6 +1,6 @@
 from mitmproxy import http
-from mitmproxy import ctx
 from mitmutils import utils
+import logging
 import re
 
 CONFIG_FILE = './kill-request.yaml'
@@ -16,5 +16,5 @@ def request(flow: http.HTTPFlow) -> None:
             if matchMethod == method:
                 for patternURL in config[matchMethod]:
                     if re.match(patternURL, url) is not None:
-                        ctx.log.warn('>>> FOUND request to kill: ' + method + ' ' + url)
+                        logging.warn('>>> FOUND request to kill: ' + method + ' ' + url)
                         flow.kill()

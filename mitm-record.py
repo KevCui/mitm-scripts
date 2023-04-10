@@ -1,9 +1,9 @@
 from mitmproxy import http
-from mitmproxy import ctx
 from mitmutils import utils
 import os
 import re
 import time
+import logging
 
 CONFIG_FILE = './record-request.yaml'
 
@@ -20,7 +20,7 @@ def response(flow: http.HTTPFlow) -> None:
             if re.match(patternURL, url) is not None:
                 dumpFile = dumpFolder + '/' + str(int(round(time.time() * 1000)))
 
-                ctx.log.info('>>> Save ' + url + ' request details to ' + dumpFile)
+                logging.info('>>> Save ' + url + ' request details to ' + dumpFile)
                 with open(dumpFile, 'a') as f:
                     f.write(str(flow.request.method) + ' ' + str(flow.request.url) + '\n')
                     for k, v in flow.request.headers.items():

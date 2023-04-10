@@ -1,6 +1,6 @@
 from mitmproxy import http
-from mitmproxy import ctx
 from mitmutils import utils
+import logging
 import re
 import json
 
@@ -17,7 +17,7 @@ def response(flow: http.HTTPFlow) -> None:
         for patternURL, jsonfilename in routers.items():
             if re.match(patternURL, url) is not None:
                 jsonfile = DATA_DIR + str(jsonfilename) + '.json'
-                ctx.log.warn('>>> FOUND "' + url + '". Send response data from "' + jsonfile + '"')
+                logging.warn('>>> FOUND "' + url + '". Send response data from "' + jsonfile + '"')
 
                 data = utils.readFile(jsonfile)
 

@@ -3,8 +3,8 @@ import re
 import json
 import random
 from ruamel.yaml import YAML
-from mitmproxy import ctx
 from time import sleep
+import logging
 
 
 def readFile(file):
@@ -17,7 +17,7 @@ def readFile(file):
     """
 
     if not os.path.isfile(file):
-        ctx.log.error("File: " + file + ' not found!')
+        logging.error("File: " + file + ' not found!')
         return None
 
     fname, fext = os.path.splitext(file)

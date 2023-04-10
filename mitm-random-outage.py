@@ -1,11 +1,11 @@
 import random
+import logging
 from mitmproxy import http
-from mitmproxy import ctx
 
 percentage = 25
 
 
 def response(flow: http.HTTPFlow) -> None:
     if random.randint(1, 100) < percentage:
-        ctx.log.warn('>>> Down ' + flow.request.url)
+        logging.warn('>>> Down ' + flow.request.url)
         flow.response = http.Response.make(503, '', {})

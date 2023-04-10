@@ -4,6 +4,7 @@ from mitmutils import utils
 import os
 import re
 import time
+import logging
 
 CONFIG_FILE = './dump-curl.yaml'
 
@@ -19,5 +20,5 @@ def request(flow: http.HTTPFlow) -> None:
 
             if re.match(patternURL, url) is not None:
                 dumpFile = dumpFolder + '/' + str(int(round(time.time() * 1000)))
-                ctx.log.info('>>> Dump ' + url + ' to ' + dumpFile)
+                logging.info('>>> Dump ' + url + ' to ' + dumpFile)
                 ctx.master.commands.call("export.file", 'curl', flow, dumpFile)

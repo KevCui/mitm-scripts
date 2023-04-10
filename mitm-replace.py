@@ -1,7 +1,7 @@
 from mitmproxy import http
-from mitmproxy import ctx
 from mitmutils import utils
 import re
+import logging
 
 HOME_DIR = './'
 DATA_DIR = HOME_DIR + 'response/'
@@ -16,10 +16,10 @@ def response(flow: http.HTTPFlow) -> None:
         for patternURL, yamlfilename in routers.items():
             if re.match(patternURL, url) is not None:
                 yamlfile = DATA_DIR + str(yamlfilename) + '.yaml'
-                ctx.log.info('>>> FOUND "' + url + '" to replace strings from "' + yamlfile + '"')
+                logging.info('>>> FOUND "' + url + '" to replace strings from "' + yamlfile + '"')
 
                 data = utils.readFile(yamlfile)
-                ctx.log.info(data)
+                logging.info(data)
 
                 if data is not None:
                     for old, new in data.items():
